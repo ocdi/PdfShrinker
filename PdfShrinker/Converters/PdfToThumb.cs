@@ -28,14 +28,13 @@ namespace PdfShrinker.Converters
         public void Convert(string sourceFilename, string destinationFilename)
         {
             Trace.TraceInformation("Creating Thumb from PDF for {0}.", sourceFilename);
-            int desired_x_dpi = 96;
-            int desired_y_dpi = 96;
+            int desired_dpi = 96;
 
 
             _rasterizer.Open(sourceFilename, _lastInstalledVersion, false);
             if (_rasterizer.PageCount > 0)
             {
-                Image page = _rasterizer.GetPage(desired_x_dpi, desired_y_dpi, 1);
+                Image page = _rasterizer.GetPage(desired_dpi, 1);
                 page.Save(destinationFilename, ImageFormat.Jpeg);
             }
             _rasterizer.Close();
